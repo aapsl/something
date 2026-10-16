@@ -36,7 +36,7 @@ Shortcuts/density_decrement=Object(Shortcut,"resource_local_to_scene":false,"res
 
 config/name="something"
 config/version="24.042.65"
-run/main_scene="uid://l7kdh8x2edta"
+run/main_scene="res://scenes/main_scene.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -45,6 +45,7 @@ config/icon="res://icon.svg"
 DialogueManager="*uid://c3rodes2l3gxb"
 SimpleGrass="*uid://bfq0snth8sj3h"
 _mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
+SceneTransitionData="*res://scripts/scene_transition_data.gd"
 
 [dialogue_manager]
 
@@ -61,7 +62,7 @@ project/assembly_name="something"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/godot_ai/plugin.cfg", "res://addons/portals/plugin.cfg", "res://addons/simplegrasstextured/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/godot_ai/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/portals/plugin.cfg", "res://addons/simplegrasstextured/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
 
 [global_group]
 

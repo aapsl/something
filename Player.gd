@@ -36,7 +36,29 @@ func _physics_process(delta: float) -> void:
 var can_move: bool = true
 
 func _ready() -> void:
+	# В SubViewport игрок из room.tscn нужен только как часть изображения портала.
+	# Он не должен захватывать мышь, двигаться по нажатиям клавиш или менять камеру портала.
+	if get_viewport() is SubViewport:
+		set_physics_process(false)
+		set_process_unhandled_input(false)
+		# Интерфейс основного игрока не должен попадать в текстуру комнаты портала.
+		var player_ui := get_node_or_null("UI") as Control
+		if player_ui != null:
+			player_ui.visible = false
+		var dialogue_layer := get_node_or_null("DialogueLayer") as CanvasLayer
+		if dialogue_layer != null:
+			dialogue_layer.visible = false
+		var preview_camera := get_node_or_null("Head/Camera3D") as Camera3D
+		if preview_camera != null:
+			preview_camera.current = false
+		return
+
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	# При переходе восстанавливаем скорость, направление и углы взгляда.
+	var transition_data := get_node_or_null("/root/SceneTransitionData")
+	var player_camera := get_node_or_null("Head/Camera3D") as Camera3D
+	if transition_data != null:
+		transition_data.call("apply", self, player_camera)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not can_move:

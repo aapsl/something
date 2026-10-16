@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PortalConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/portal_config.gd" id="1_config"]
+
+[resource]
+script = ExtResource("1_config")
+room_scene_path = "res://scenes/room_b.tscn"
+load_distance = 20.0
+unload_distance = 30.0
+unload_delay = 5.0
+portal_camera_fov = 75.0
+viewport_size = Vector2i(540, 990)
+flip_hysteresis = 0.15
+door_open_radius = 3.0
+auto_close_delay = 2.0
+door_animation_time = 0.45
+door_open_angle_deg = 100.0
+door_open_direction = 1

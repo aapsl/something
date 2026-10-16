@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/door_controller.gd" id="1_door"]
+[ext_resource type="Script" path="res://scripts/portal_controller.gd" id="2_portal"]
+[ext_resource type="Resource" path="res://configs/portal_default.tres" id="3_config"]
+
+[sub_resource type="SphereShape3D" id="LoadTriggerShape"]
+radius = 20.0
+
+[sub_resource type="SphereShape3D" id="OpenTriggerShape"]
+radius = 3.0
+
+[sub_resource type="BoxShape3D" id="PassageTriggerShape"]
+size = Vector3(1.2, 2.2, 0.1)
+
+[sub_resource type="PlaneMesh" id="PortalPlane"]
+size = Vector2(1.2, 2.2)
+
+[node name="DoorFrame" type="Node3D"]
+script = ExtResource("1_door")
+room_scene_path = "res://scenes/room_a.tscn"
+open_trigger_path = NodePath("DoorOpenTrigger")
+passage_trigger_path = NodePath("DoorTransitionTrigger")
+
+[node name="DoorModel" type="Node3D" parent="."]
+
+[node name="DoorPivot" type="Node3D" parent="."]
+
+[node name="DoorLeaf" type="MeshInstance3D" parent="DoorPivot"]
+
+[node name="PortalSurface" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0, 0.02)
+rotation = Vector3(-1.5707963, 0, 0)
+mesh = SubResource("PortalPlane")
+visible = false
+
+[node name="PortalSystem" type="Node" parent="."]
+
+[node name="PortalViewport" type="SubViewport" parent="PortalSystem"]
+size = Vector2i(540, 990)
+own_world_3d = true
+render_target_update_mode = 0
+transparent_bg = false
+
+[node name="RoomScene" type="Node3D" parent="PortalSystem/PortalViewport"]
+
+[node name="RoomEntry" type="Marker3D" parent="PortalSystem/PortalViewport"]
+position = Vector3(0, 1.1, 0)
+
+[node name="PortalCamera" type="Camera3D" parent="PortalSystem/PortalViewport"]
+position = Vector3(0, 1.1, 0)
+fov = 75.0
+current = true
+
+[node name="PortalController" type="Node" parent="PortalSystem"]
+script = ExtResource("2_portal")
+config = ExtResource("3_config")
+load_trigger_path = NodePath("../../DoorTrigger")
+
+[node name="DoorTrigger" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorTrigger"]
+shape = SubResource("LoadTriggerShape")
+
+[node name="DoorOpenTrigger" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorOpenTrigger"]
+shape = SubResource("OpenTriggerShape")
+
+[node name="DoorTransitionTrigger" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorTransitionTrigger"]
+shape = SubResource("PassageTriggerShape")

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/door.tscn" id="2_door"]
+
+[sub_resource type="BoxShape3D" id="FloorShape"]
+size = Vector3(40, 0.1, 40)
+
+[sub_resource type="BoxMesh" id="FloorMesh"]
+size = Vector3(40, 0.1, 40)
+
+[node name="MainScene" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 4)
+collision_layer = 1
+
+[node name="Floor" type="StaticBody3D" parent="."]
+position = Vector3(0, -0.05, 0)
+collision_layer = 1
+
+[node name="FloorCollision" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("FloorShape")
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("FloorMesh")
+
+[node name="DoorFrame" parent="." instance=ExtResource("2_door")]
+position = Vector3(0, 1.1, 0)
+room_scene_path = "res://scenes/room_b.tscn"

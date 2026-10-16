@@ -1,61 +1,97 @@
-[gd_scene format=3 uid="uid://cniq5nnprhixo"]
+[gd_scene format=3 uid="uid://cqdnr3kytxuc4"]
 
 [ext_resource type="PackedScene" uid="uid://do7fe1f86nkro" path="res://player.tscn" id="1_36trf"]
+[ext_resource type="Script" uid="uid://b4gv72ek843de" path="res://scripts/door_controller.gd" id="2_14vil"]
+[ext_resource type="Resource" path="res://configs/portal_default.tres" id="3_jxe34"]
+[ext_resource type="Script" uid="uid://c1lrtqv6c8qhv" path="res://scripts/portal_controller.gd" id="4_jn645"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_73whl"]
+[sub_resource type="BoxShape3D" id="FloorShape"]
+size = Vector3(40, 0.1, 40)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_yxfls"]
-size = Vector3(0.14056396, 0.07421875, 0.14285278)
+[sub_resource type="BoxMesh" id="FloorMesh"]
+size = Vector3(40, 0.1, 40)
 
-[sub_resource type="BoxMesh" id="BoxMesh_73whl"]
-size = Vector3(30, 25, 1)
+[sub_resource type="PlaneMesh" id="PortalPlane"]
+size = Vector2(1.2, 2.2)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jufxs"]
+[sub_resource type="SphereShape3D" id="LoadTriggerShape"]
+radius = 20.0
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jufxs"]
-sky_top_color = Color(0.017314749, 0.3776405, 0.99999994, 1)
-sky_horizon_color = Color(0, 0.7663839, 0.59946096, 1)
-sky_curve = 0.6430634
+[sub_resource type="SphereShape3D" id="OpenTriggerShape"]
+radius = 3.0
 
-[sub_resource type="Sky" id="Sky_yxfls"]
-sky_material = SubResource("ProceduralSkyMaterial_jufxs")
+[sub_resource type="BoxShape3D" id="PassageTriggerShape"]
+size = Vector3(1.2, 2.2, 0.1)
 
-[sub_resource type="Environment" id="Environment_73whl"]
-background_mode = 2
-sky = SubResource("Sky_yxfls")
+[node name="MainScene" type="Node3D" unique_id=2036364014]
 
-[node name="Room" type="Node3D" unique_id=794431694]
+[node name="Player" parent="." unique_id=1133190664 instance=ExtResource("1_36trf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 4)
 
-[node name="Ground" type="Node3D" parent="." unique_id=430430127]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
+[node name="Floor" type="StaticBody3D" parent="." unique_id=93590694]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1847143164]
-mesh = SubResource("PlaneMesh_73whl")
+[node name="FloorCollision" type="CollisionShape3D" parent="Floor" unique_id=74993974]
+shape = SubResource("FloorShape")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground/MeshInstance3D" unique_id=948750685]
+[node name="FloorMesh" type="MeshInstance3D" parent="Floor" unique_id=1648410714]
+mesh = SubResource("FloorMesh")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/MeshInstance3D/StaticBody3D" unique_id=1444035294]
-transform = Transform3D(15, 0, 0, 0, 0.2, 0, 0, 0, 15, 0, -0.003, 0)
-rotation_order = 0
-shape = SubResource("BoxShape3D_yxfls")
+[node name="DoorFrame" type="Node3D" parent="." unique_id=862672447]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+script = ExtResource("2_14vil")
+config = ExtResource("3_jxe34")
 
-[node name="Wall" type="Node3D" parent="." unique_id=1525416636]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48316884, 14.493208)
+[node name="DoorModel" type="Node3D" parent="DoorFrame" unique_id=1683214612]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall" unique_id=1410846664]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00642395, 11.011307, 0)
-mesh = SubResource("BoxMesh_73whl")
+[node name="DoorPivot" type="Node3D" parent="DoorFrame" unique_id=583224475]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Wall/MeshInstance3D" unique_id=1520837463]
+[node name="DoorLeaf" type="MeshInstance3D" parent="DoorFrame/DoorPivot" unique_id=34915655]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/MeshInstance3D/StaticBody3D" unique_id=261740667]
-transform = Transform3D(30, 0, 0, 0, 25, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_jufxs")
+[node name="PortalSurface" type="MeshInstance3D" parent="DoorFrame" unique_id=327479828]
+transform = Transform3D(1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0, 0.02)
+visible = false
+mesh = SubResource("PortalPlane")
 
-[node name="Player" parent="." unique_id=1684426186 instance=ExtResource("1_36trf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1393614, 0.026862502)
-floor_block_on_wall = false
-floor_max_angle = 3.1415927
+[node name="PortalSystem" type="Node" parent="DoorFrame" unique_id=1264574778]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1000416400]
-environment = SubResource("Environment_73whl")
+[node name="PortalViewport" type="SubViewport" parent="DoorFrame/PortalSystem" unique_id=783177544]
+own_world_3d = true
+size = Vector2i(540, 990)
+render_target_update_mode = 0
+
+[node name="RoomScene" type="Node3D" parent="DoorFrame/PortalSystem/PortalViewport" unique_id=956650131]
+
+[node name="RoomEntry" type="Marker3D" parent="DoorFrame/PortalSystem/PortalViewport" unique_id=670033691]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+
+[node name="PortalCamera" type="Camera3D" parent="DoorFrame/PortalSystem/PortalViewport" unique_id=891189089]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+current = true
+
+[node name="PortalController" type="Node" parent="DoorFrame/PortalSystem" unique_id=1034634340]
+script = ExtResource("4_jn645")
+config = ExtResource("3_jxe34")
+
+[node name="DoorTrigger" type="Area3D" parent="." unique_id=985095956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorTrigger" unique_id=1512829744]
+shape = SubResource("LoadTriggerShape")
+
+[node name="DoorOpenTrigger" type="Area3D" parent="." unique_id=963828088]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorOpenTrigger" unique_id=1397279504]
+shape = SubResource("OpenTriggerShape")
+
+[node name="DoorTransitionTrigger" type="Area3D" parent="." unique_id=1306770606]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorTransitionTrigger" unique_id=1795228106]
+shape = SubResource("PassageTriggerShape")

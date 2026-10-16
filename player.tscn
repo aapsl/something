@@ -18,6 +18,7 @@ shape = SubResource("CapsuleShape3D_73whl")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14198369, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=434725366]
+near = 0.01
 
 [node name="RayCast3D" type="RayCast3D" parent="Head" unique_id=1827865571]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.021045685, -0.047746062)

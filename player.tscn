@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://do7fe1f86nkro"]
+
+[ext_resource type="Script" uid="uid://dtcmmy0q6ewej" path="res://Player.gd" id="1_4flbx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_73whl"]
+height = 1.7021484
+
+[node name="Player" type="CharacterBody3D" unique_id=1684426186 groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04016924, 0.026862502)
+script = ExtResource("1_4flbx")
+mouse_sensivity = 0.004
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1447388626]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14892578, 0)
+shape = SubResource("CapsuleShape3D_73whl")
+
+[node name="Head" type="Node3D" parent="." unique_id=190996612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14198369, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=434725366]
+
+[node name="RayCast3D" type="RayCast3D" parent="Head" unique_id=1827865571]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.021045685, -0.047746062)
+target_position = Vector3(0, 0, -3)
+collide_with_areas = true
+
+[node name="UI" type="Control" parent="." unique_id=1268874551]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Control" type="CenterContainer" parent="UI" unique_id=1386335253]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Crosshair" type="ColorRect" parent="UI/Control" unique_id=962659001]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.4)
+
+[node name="DialogueLayer" type="CanvasLayer" parent="." unique_id=581629890]
+
+[node name="DialogueBox" type="Panel" parent="DialogueLayer" unique_id=769732480]
+visible = false
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogueLayer/DialogueBox" unique_id=1288911532]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DialogueText" type="Label" parent="DialogueLayer/DialogueBox/MarginContainer" unique_id=2004943902]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+autowrap_mode = 2

@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://dksrdy3tusvf7"]
+
+[ext_resource type="PackedScene" uid="uid://do7fe1f86nkro" path="res://player.tscn" id="1_6pmjc"]
+[ext_resource type="Script" uid="uid://bap4qe6auuac8" path="res://scenes/door.gd" id="2_ttalb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ffxv4"]
+sky_top_color = Color(0.67815596, 0.7351704, 0.81037796, 1)
+sky_horizon_color = Color(0.25760344, 0.26327083, 0.27461755, 1)
+ground_horizon_color = Color(0.58535534, 0.59364796, 0.61023784, 1)
+
+[sub_resource type="Sky" id="Sky_36trf"]
+sky_material = SubResource("ProceduralSkyMaterial_ffxv4")
+
+[sub_resource type="Environment" id="Environment_73whl"]
+background_mode = 2
+background_color = Color(0.19434929, 0.19434926, 0.19434926, 1)
+sky = SubResource("Sky_36trf")
+ambient_light_color = Color(1, 1, 1, 1)
+fog_enabled = true
+fog_light_color = Color(0.3217278, 0.32172802, 0.32172787, 1)
+fog_density = 0.02
+fog_height_density = 2.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+volumetric_fog_albedo = Color(0.65834, 0.65834, 0.6583398, 1)
+volumetric_fog_emission = Color(0.12591085, 0.12591085, 0.12591082, 1)
+volumetric_fog_length = 128.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_73whl"]
+albedo_color = Color(0.8425113, 0.0958061, 6.7383053e-06, 1)
+emission_enabled = true
+emission = Color(0.3372549, 0.101960786, 0.101960786, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_73whl"]
+material = SubResource("StandardMaterial3D_73whl")
+size = Vector3(1, 2.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yxfls"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jufxs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yxfls"]
+albedo_color = Color(0.19917446, 0.44691795, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_73whl"]
+material = SubResource("StandardMaterial3D_yxfls")
+size = Vector2(60, 60)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_73whl"]
+
+[node name="Field" type="Node3D" unique_id=883231904]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1326071121]
+environment = SubResource("Environment_73whl")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1986399658]
+transform = Transform3D(0.8894706, -0.409029, -0.2038076, -0.22680306, -0.007932648, -0.97390836, 0.39674005, 0.91248685, -0.099824965, 0, 42.835403, 0)
+light_energy = 0.5
+
+[node name="Player" parent="." unique_id=1684426186 instance=ExtResource("1_6pmjc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.536808, 0.026862502)
+
+[node name="Door" type="Node3D" parent="." unique_id=517997038]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -25)
+script = ExtResource("2_ttalb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door" unique_id=1168080712]
+mesh = SubResource("BoxMesh_73whl")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Door/MeshInstance3D" unique_id=646236560]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door/MeshInstance3D/StaticBody3D" unique_id=1208884054]
+transform = Transform3D(1, 0, 0, 0, 2.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_yxfls")
+
+[node name="Area3D" type="Area3D" parent="Door" unique_id=1977504183]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door/Area3D" unique_id=274261716]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("BoxShape3D_jufxs")
+
+[node name="Ground" type="Node3D" parent="." unique_id=1098746882]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=560739101]
+mesh = SubResource("PlaneMesh_73whl")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/MeshInstance3D" unique_id=736268261]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/MeshInstance3D/StaticBody3D" unique_id=1134481786]
+transform = Transform3D(60, 0, 0, 0, 1, 0, 0, 0, 60, 0, 0, 0)
+shape = SubResource("BoxShape3D_73whl")

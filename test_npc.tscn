@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bgmnr0dpjrq25"]
+
+[ext_resource type="Script" uid="uid://c2cdtu3600upk" path="res://test_npc.gd" id="1_6oyph"]
+[ext_resource type="Resource" uid="uid://bph17eujc5dt7" path="res://dialogues/testing.dialogue" id="2_6iot3"]
+[ext_resource type="Texture2D" uid="uid://um58gcorbp7m" path="res://icon.svg" id="2_c5de4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_73whl"]
+
+[node name="TestNPC" type="Area3D" unique_id=1399332185]
+script = ExtResource("1_6oyph")
+dialogue_resourse = ExtResource("2_6iot3")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1880882212]
+billboard = 2
+texture = ExtResource("2_c5de4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2092373532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045175552, 0)
+shape = SubResource("BoxShape3D_73whl")

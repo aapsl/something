@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cjxe1qgcjguy4"]
+
+[ext_resource type="PackedScene" uid="uid://bgmnr0dpjrq25" path="res://test_npc.tscn" id="2_1c2mv"]
+[ext_resource type="PackedScene" uid="uid://do7fe1f86nkro" path="res://player.tscn" id="2_f7g2b"]
+
+[sub_resource type="Sky" id="Sky_1c2mv"]
+
+[sub_resource type="Environment" id="Environment_4ptq8"]
+background_mode = 1
+background_color = Color(0.045968793, 0.23291865, 0.43851733, 0.62352943)
+sky = SubResource("Sky_1c2mv")
+sky_custom_fov = 9.3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 2.32
+
+[node name="TestLevel" type="Node3D" unique_id=1627420547]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1879477288]
+use_collision = true
+size = Vector3(30, 1, 30)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2127544135]
+transform = Transform3D(0.6467898, -0.5269142, 0.55138415, 0, 0.72296715, 0.69088244, -0.7626684, -0.44685572, 0.46760777, 57.03181, 60.296837, 42.673347)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=41301965]
+environment = SubResource("Environment_4ptq8")
+
+[node name="TestNPC" parent="WorldEnvironment" unique_id=1399332185 instance=ExtResource("2_1c2mv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2674837, -8.202744)
+
+[node name="Player" parent="WorldEnvironment" unique_id=1684426186 instance=ExtResource("2_f7g2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7799535, 0.026862502)

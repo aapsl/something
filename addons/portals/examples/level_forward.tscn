@@ -1,0 +1,266 @@
+[gd_scene format=4 uid="uid://cey6k8ip6nn8w"]
+
+[ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://addons/portals/examples/assets/materials/M_prototype_dark.tres" id="1_6hsda"]
+[ext_resource type="Material" uid="uid://dyx4l6ea0am6f" path="res://addons/portals/examples/assets/materials/M_prototype_green.tres" id="1_ym1tr"]
+[ext_resource type="Script" uid="uid://bjknytsx2gu0i" path="res://addons/portals/examples/assets/forwarded_raycast.gd" id="3_4lvjw"]
+[ext_resource type="Material" uid="uid://brj2jayoo0l0d" path="res://addons/portals/examples/assets/materials/M_prototype_blue.tres" id="3_nrnmy"]
+[ext_resource type="Script" uid="uid://d2crarvkhd45r" path="res://addons/portals/examples/assets/player.gd" id="4_nrnmy"]
+[ext_resource type="Script" uid="uid://cw1r4c1d7beyv" path="res://addons/portals/scripts/portal_3d.gd" id="5_wviww"]
+[ext_resource type="Script" uid="uid://c7oiumhuoj71s" path="res://addons/portals/examples/assets/colorshift_cube.gd" id="7_dqevk"]
+[ext_resource type="Material" uid="uid://dcfkcyddxkglf" path="res://addons/portals/materials/editor-preview-portal-material.tres" id="9_7bsmn"]
+[ext_resource type="PackedScene" uid="uid://bb1b3cg0khq5k" path="res://addons/portals/examples/assets/poor_mans_crosshair.tscn" id="9_fv6tu"]
+[ext_resource type="Script" uid="uid://bxcel82b180o3" path="res://addons/portals/scripts/portal_boxmesh.gd" id="9_kw6xj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_62h3h"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_wviww"]
+sky_material = SubResource("ProceduralSkyMaterial_62h3h")
+
+[sub_resource type="Environment" id="Environment_dqevk"]
+background_mode = 2
+sky = SubResource("Sky_wviww")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_62h3h"]
+height = 1.75
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wviww"]
+radius = 0.4
+height = 1.75
+
+[sub_resource type="BoxMesh" id="BoxMesh_2clkf"]
+size = Vector3(10, 1, 20)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hv1ah"]
+points = PackedVector3Array(5, 0.5, 10, 5, -0.5, 10, 5, 0.5, -10, -5, 0.5, 10, -5, -0.5, 10, 5, -0.5, -10, -5, 0.5, -10, -5, -0.5, -10)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_wviww"]
+_surfaces = [{
+"aabb": AABB(-2.6, -1.6, -0.1, 5.2, 3.2, 0.2),
+"attribute_data": PackedByteArray("AACAP8+JnTwAAIA/AAAAAAAAAAAAAAAAAACAPwAAAACyE3s/AAAgMwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAP7ITez8AAIA/z4mdPAAAAAAAAAAAshN7P///fz8AAIA/AACAP7ITez8CAAA9AAAAAAAAAAAAAAAAz4mdPAAAgD8AAIA/AACAPwAAgD+yE3s/AAAgM7ITez8AAHg/AACAPwAAgD+yE3s/AAB4PwAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAAACyE3s/AgAAPQAAgD8AAIA/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAAADPiZ08AgAAPbITez8CAAA9AAAAAAAAAAAAAIA/AACAPwAAgD+yE3s/z4mdPAAAIDMAAAAAAAAAAM+JnTwAAHg/AAAAAM+JnTwAAAAAshN7PwAAgD8AAIA/AAAAALITez8AAAAAAACAPwAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AAAAAAAAgD/PiZ08//9/PwAAAAAAAAAAAAAAAAAAgD+yE3s/AAB4P8+JnTwAAHg/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AAAAAAAAgD/PiZ08AAB4PwAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAADPiZ08AgAAPQAAgD8AAAAAAAAAAAAAAADPiZ08//9/P8+JnTwCAAA9zczMPgAAAACamRk/AAAAAJqZGT8AAIA/AAAAAJqZGT8AAIA/zczMPgAAgD+amRk/AAAAAM3MzD4AAIA/zczMPgAAAACamRk/mpkZPwAAgD/NzMw+AACAP83MzD4AAAAAAAAAAJqZGT8AAIA/zczMPgAAgD+amRk/mpkZPwAAgD/NzMw+AACAP83MzD4AAAAAzczMPgAAAACamRk/AAAAAJqZGT8AAIA/AAAAAM3MzD4AAIA/zczMPgAAAACamRk/"),
+"format": 34359738391,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 96,
+"vertex_data": PackedByteArray("AAAgwMzMzL/NzMy9ZmYmwM3MzL/NzMy9ZmYmwM3MzL/NzMw9ZmYmwM3MzL/NzMy9AAAgwMzMzL/NzMy9ZmYmwM3MzD/NzMy9ZmYmwM3MzL/NzMw9ZmYmwM3MzL/NzMy9ZmYmwM3MzD/NzMy9AAAgQMzMzL/NzMy9AAAgwMzMzL/NzMy9ZmYmwM3MzL/NzMw9AAAgwMzMzL/NzMw9ZmYmwM3MzL/NzMw9AAAgwAAAwD/NzMw9ZmYmwM3MzL/NzMw9AAAgwMzMzL/NzMw9ZmYmQM3MzL/NzMy9ZmYmwM3MzD/NzMy9AAAgwMzMzL/NzMy9AAAgwAAAwD/NzMy9ZmYmwM3MzD/NzMy9AAAgwAAAwD/NzMy9ZmYmQM3MzD/NzMy9ZmYmwM3MzD/NzMy9ZmYmwM3MzD/NzMw9ZmYmwM3MzL/NzMw9ZmYmwM3MzD/NzMw9AAAgwAAAwD/NzMw9ZmYmwM3MzL/NzMw9ZmYmwM3MzD/NzMy9ZmYmQM3MzD/NzMw9ZmYmwM3MzD/NzMw9ZmYmwM3MzD/NzMw9AAAgQAAAwD/NzMw9AAAgwAAAwD/NzMw9ZmYmwM3MzL/NzMw9ZmYmQM3MzL/NzMy9AAAgQMzMzL/NzMy9AAAgQMzMzL/NzMy9ZmYmQM3MzL/NzMy9AAAgQAAAwD/NzMy9AAAgwMzMzL/NzMw9AAAgQMzMzL/NzMw9ZmYmQM3MzL/NzMy9AAAgQMzMzL/NzMw9ZmYmQM3MzL/NzMw9ZmYmQM3MzL/NzMy9ZmYmQM3MzL/NzMw9ZmYmQM3MzD/NzMw9ZmYmQM3MzL/NzMy9ZmYmQM3MzL/NzMw9AAAgQMzMzL/NzMw9ZmYmQM3MzD/NzMw9ZmYmQM3MzD/NzMy9AAAgwAAAwD/NzMy9AAAgQAAAwD/NzMy9ZmYmQM3MzD/NzMy9ZmYmQM3MzD/NzMw9ZmYmwM3MzD/NzMy9ZmYmQM3MzD/NzMy9AAAgQAAAwD/NzMy9ZmYmQM3MzL/NzMy9ZmYmQM3MzD/NzMw9ZmYmQM3MzD/NzMy9ZmYmQM3MzL/NzMy9ZmYmQM3MzD/NzMw9AAAgQAAAwD/NzMw9ZmYmwM3MzD/NzMw9ZmYmQM3MzD/NzMw9AAAgQMzMzL/NzMw9AAAgQAAAwD/NzMw9AAAgwMzMzL/NzMw9AAAgwMzMzL/NzMy9AAAgQMzMzL/NzMy9AAAgwAAAwD/NzMw9AAAgwMzMzL/NzMy9AAAgwMzMzL/NzMw9AAAgwAAAwD/NzMy9AAAgwMzMzL/NzMy9AAAgwAAAwD/NzMw9AAAgwAAAwD/NzMy9AAAgwAAAwD/NzMw9AAAgQAAAwD/NzMw9AAAgQAAAwD/NzMy9AAAgQMzMzL/NzMw9AAAgQMzMzL/NzMy9AAAgQMzMzL/NzMy9AAAgQMzMzL/NzMw9AAAgwMzMzL/NzMw9AAAgQAAAwD/NzMw9AAAgQAAAwD/NzMy9AAAgwAAAwD/NzMy9AAAgQAAAwD/NzMw9AAAgQMzMzL/NzMw9AAAgQAAAwD/NzMy9/38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP7/AAD/fwAA/v8AAP9/AAD+/wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//38BAP3//n//fwEA/f/+f/9/AQD9//5//////wAA/z//////AAD/P/////8AAP8//////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//n8AAAEAAAD+fwAAAQAAAP5/AAABAAAA/////wAA/z//////AAD/P/////8AAP8//38AAP7//n//fwAA/v/+f/9/AAD+//5//38AAP//AAD/fwAA//8AAP9/AAD//wAA////f/9//n////9//3/+f////3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA/////wAA/z//////AAD/P/////8AAP8/////f/9//n////9//3/+f////3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////////f/////////9/////////////f/9/AID///9//38AgP///3//fwCA////f/9/AID///9//38AgP///3//fwCA/38AAP//////fwAA//////9/AAD/////AAD/f/9/AIAAAP9//38AgAAA/3//fwCA/3//////////f/////////9//////////38AAP//////fwAA//////9/AAD/////AAD/f/9/AIAAAP9//38AgAAA/3//fwCA")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dqevk"]
+data = PackedVector3Array(-2.5, -1.6, -0.1, -2.6, -1.6, -0.1, -2.6, -1.6, 0.1, -2.6, -1.6, -0.1, -2.5, -1.6, -0.1, -2.6, 1.6, -0.1, -2.6, -1.6, 0.1, -2.6, -1.6, -0.1, -2.6, 1.6, -0.1, 2.5, -1.6, -0.1, -2.5, -1.6, -0.1, -2.6, -1.6, 0.1, -2.5, -1.6, 0.1, -2.6, -1.6, 0.1, -2.5, 1.5, 0.1, -2.6, -1.6, 0.1, -2.5, -1.6, 0.1, 2.6, -1.6, -0.1, -2.6, 1.6, -0.1, -2.5, -1.6, -0.1, -2.5, 1.5, -0.1, -2.6, 1.6, -0.1, -2.5, 1.5, -0.1, 2.6, 1.6, -0.1, -2.6, 1.6, -0.1, -2.6, 1.6, 0.1, -2.6, -1.6, 0.1, -2.6, 1.6, 0.1, -2.5, 1.5, 0.1, -2.6, -1.6, 0.1, -2.6, 1.6, -0.1, 2.6, 1.6, 0.1, -2.6, 1.6, 0.1, -2.6, 1.6, 0.1, 2.5, 1.5, 0.1, -2.5, 1.5, 0.1, -2.6, -1.6, 0.1, 2.6, -1.6, -0.1, 2.5, -1.6, -0.1, 2.5, -1.6, -0.1, 2.6, -1.6, -0.1, 2.5, 1.5, -0.1, -2.5, -1.6, 0.1, 2.5, -1.6, 0.1, 2.6, -1.6, -0.1, 2.5, -1.6, 0.1, 2.6, -1.6, 0.1, 2.6, -1.6, -0.1, 2.6, -1.6, 0.1, 2.6, 1.6, 0.1, 2.6, -1.6, -0.1, 2.6, -1.6, 0.1, 2.5, -1.6, 0.1, 2.6, 1.6, 0.1, 2.6, 1.6, -0.1, -2.5, 1.5, -0.1, 2.5, 1.5, -0.1, 2.6, 1.6, -0.1, 2.6, 1.6, 0.1, -2.6, 1.6, -0.1, 2.6, 1.6, -0.1, 2.5, 1.5, -0.1, 2.6, -1.6, -0.1, 2.6, 1.6, 0.1, 2.6, 1.6, -0.1, 2.6, -1.6, -0.1, 2.6, 1.6, 0.1, 2.5, 1.5, 0.1, -2.6, 1.6, 0.1, 2.6, 1.6, 0.1, 2.5, -1.6, 0.1, 2.5, 1.5, 0.1, -2.5, -1.6, 0.1, -2.5, -1.6, -0.1, 2.5, -1.6, -0.1, -2.5, 1.5, 0.1, -2.5, -1.6, -0.1, -2.5, -1.6, 0.1, -2.5, 1.5, -0.1, -2.5, -1.6, -0.1, -2.5, 1.5, 0.1, -2.5, 1.5, -0.1, -2.5, 1.5, 0.1, 2.5, 1.5, 0.1, 2.5, 1.5, -0.1, 2.5, -1.6, 0.1, 2.5, -1.6, -0.1, 2.5, -1.6, -0.1, 2.5, -1.6, 0.1, -2.5, -1.6, 0.1, 2.5, 1.5, 0.1, 2.5, 1.5, -0.1, -2.5, 1.5, -0.1, 2.5, 1.5, 0.1, 2.5, -1.6, 0.1, 2.5, 1.5, -0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wviww"]
+size = Vector3(5, 3, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_76ped"]
+_surfaces = [{
+"aabb": AABB(-2.5, -1.5, -1, 5, 3, 1),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAQABAABAAUAAQADAAUABQADAAcAAwACAAcABwACAAYAAgAAAAYABgAAAAQABAAFAAYABgAFAAcAAAABAAIAAgABAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAgwAAAwD8AAAAAAAAgQAAAwD8AAAAAAAAgwAAAwL8AAAAAAAAgQAAAwL8AAAAAAAAgwAAAwD8AAIC/AAAgQAAAwD8AAIC/AAAgwAAAwL8AAIC/AAAgQAAAwL8AAIC//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgA==")
+}]
+script = ExtResource("9_kw6xj")
+size = Vector3(5, 3, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dqevk"]
+size = Vector3(5, 3, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_wirfr"]
+_surfaces = [{
+"aabb": AABB(-2.5, -1.5, -1, 5, 3, 1),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAQABAABAAUAAQADAAUABQADAAcAAwACAAcABwACAAYAAgAAAAYABgAAAAQABAAFAAYABgAFAAcAAAABAAIAAgABAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAgwAAAwD8AAAAAAAAgQAAAwD8AAAAAAAAgwAAAwL8AAAAAAAAgQAAAwL8AAAAAAAAgwAAAwD8AAIC/AAAgQAAAwD8AAIC/AAAgwAAAwL8AAIC/AAAgQAAAwL8AAIC//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgA==")
+}]
+script = ExtResource("9_kw6xj")
+size = Vector3(5, 3, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p3b8s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4lvjw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4lvjw"]
+
+[node name="Level_Forward" type="Node3D" unique_id=196602828]
+
+[node name="PoorMansCrosshair" parent="." unique_id=2100654611 instance=ExtResource("9_fv6tu")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=578089838]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=312744739]
+environment = SubResource("Environment_dqevk")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=174293968 node_paths=PackedStringArray("camera")]
+process_priority = 100
+process_physics_priority = 100
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.448394, 0.875832, 5.91448)
+collision_layer = 32769
+script = ExtResource("4_nrnmy")
+camera = NodePath("PlayerCamera")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=187625979]
+shape = SubResource("CapsuleShape3D_62h3h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1834018745]
+mesh = SubResource("CapsuleMesh_wviww")
+
+[node name="PlayerCamera" type="Camera3D" parent="Player" unique_id=1680664189]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+current = true
+
+[node name="ForwardedRaycast" type="RayCast3D" parent="Player/PlayerCamera" unique_id=1835108304]
+target_position = Vector3(0, 0, -20)
+collision_mask = 129
+collide_with_areas = true
+debug_shape_thickness = 3
+script = ExtResource("3_4lvjw")
+
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=1684489723]
+transform = Transform3D(1, -1.00701e-05, 8.73277e-06, 1.00701e-05, 1, -1.12671e-05, -8.73277e-06, 1.12671e-05, 1, 0, -0.5, 0)
+material_override = ExtResource("1_ym1tr")
+mesh = SubResource("BoxMesh_2clkf")
+metadata/_edit_group_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground" unique_id=190091188]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D" unique_id=467813682]
+shape = SubResource("ConvexPolygonShape3D_hv1ah")
+
+[node name="Ground2" type="MeshInstance3D" parent="." unique_id=213364247]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -0.5, 0)
+material_override = ExtResource("3_nrnmy")
+mesh = SubResource("BoxMesh_2clkf")
+metadata/_edit_group_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground2" unique_id=1686217932]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/StaticBody3D" unique_id=884905227]
+shape = SubResource("ConvexPolygonShape3D_hv1ah")
+
+[node name="PortalFrame" type="MeshInstance3D" parent="." unique_id=1466021753]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.501, 0)
+material_override = ExtResource("1_6hsda")
+mesh = SubResource("ArrayMesh_wviww")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="PortalFrame" unique_id=321674751]
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="PortalFrame/StaticBody3D" unique_id=860768764]
+visible = false
+shape = SubResource("ConcavePolygonShape3D_dqevk")
+
+[node name="PortalFrame2" type="MeshInstance3D" parent="." unique_id=1686275947]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 12, 1.501, 0)
+material_override = ExtResource("1_6hsda")
+mesh = SubResource("ArrayMesh_wviww")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="PortalFrame2" unique_id=1767869301]
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="PortalFrame2/StaticBody3D" unique_id=292585902]
+visible = false
+shape = SubResource("ConcavePolygonShape3D_dqevk")
+
+[node name="GreenPortal" type="Node3D" parent="." unique_id=1224552533 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+process_priority = 100
+process_physics_priority = 100
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("5_wviww")
+_portal_mesh_path = NodePath("GreenPortal_Mesh")
+_teleport_area_path = NodePath("TeleportArea")
+_teleport_collider_path = NodePath("TeleportArea/Collider")
+portal_size = Vector2(5, 3)
+exit_portal = NodePath("../BluePortal")
+portal_frame_width = 0.0
+viewport_size_mode = 0
+view_direction = 0
+portal_render_layer = 524288
+is_teleport = true
+teleport_direction = 2
+rigidbody_boost = 0.0
+teleport_tolerance = 0.5
+teleport_interactions = 3
+teleport_collision_mask = 32768
+start_deactivated = false
+metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
+metadata/_edit_group_ = true
+
+[node name="TeleportArea" type="Area3D" parent="GreenPortal" unique_id=427010816]
+
+[node name="Collider" type="CollisionShape3D" parent="GreenPortal/TeleportArea" unique_id=842253553]
+shape = SubResource("BoxShape3D_wviww")
+
+[node name="GreenPortal_Mesh" type="MeshInstance3D" parent="GreenPortal" unique_id=1596771125]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
+layers = 524288
+material_override = ExtResource("9_7bsmn")
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_76ped")
+
+[node name="BluePortal" type="Node3D" parent="." unique_id=1027331609 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+process_priority = 100
+process_physics_priority = 100
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 12, 1.5, 0)
+script = ExtResource("5_wviww")
+_portal_mesh_path = NodePath("BluePortal_Mesh")
+_teleport_area_path = NodePath("TeleportArea")
+_teleport_collider_path = NodePath("TeleportArea/Collider")
+portal_size = Vector2(5, 3)
+exit_portal = NodePath("../GreenPortal")
+portal_frame_width = 0.0
+viewport_size_mode = 0
+view_direction = 0
+portal_render_layer = 524288
+is_teleport = true
+teleport_direction = 2
+rigidbody_boost = 0.0
+teleport_tolerance = 0.5
+teleport_interactions = 3
+teleport_collision_mask = 32768
+start_deactivated = false
+metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
+metadata/_edit_group_ = true
+
+[node name="TeleportArea" type="Area3D" parent="BluePortal" unique_id=403404761]
+
+[node name="Collider" type="CollisionShape3D" parent="BluePortal/TeleportArea" unique_id=1339060919]
+shape = SubResource("BoxShape3D_dqevk")
+
+[node name="BluePortal_Mesh" type="MeshInstance3D" parent="BluePortal" unique_id=485058784]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
+layers = 524288
+material_override = ExtResource("9_7bsmn")
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_wirfr")
+
+[node name="ColorshiftCube" type="StaticBody3D" parent="." unique_id=496224362]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.75, 0.5, -3.75)
+script = ExtResource("7_dqevk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ColorshiftCube" unique_id=738796709]
+shape = SubResource("BoxShape3D_p3b8s")
+
+[node name="CubeMesh" type="MeshInstance3D" parent="ColorshiftCube" unique_id=941408884]
+material_override = SubResource("StandardMaterial3D_4lvjw")
+mesh = SubResource("BoxMesh_4lvjw")
+skeleton = NodePath("../..")
+
+[node name="Label3D" type="Label3D" parent="ColorshiftCube" unique_id=1782079942]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.928163, 0)
+billboard = 2
+text = "Shoot to change color"

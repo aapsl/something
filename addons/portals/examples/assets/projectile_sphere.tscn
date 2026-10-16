@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cdr0bql7jj43n"]
+
+[ext_resource type="Material" uid="uid://7to3kb1tisdd" path="res://addons/portals/examples/assets/materials/M_prototype_orange.tres" id="1_dlerm"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dlerm"]
+friction = 0.75
+bounce = 0.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_m81n0"]
+material = ExtResource("1_dlerm")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_frlfj"]
+radius = 0.25
+
+[node name="ProjectileSphere" type="RigidBody3D" unique_id=1048106225]
+editor_description = "This rigidbody doesn't collide with portals. The area nested inside takes care of that."
+physics_material_override = SubResource("PhysicsMaterial_dlerm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1740446774]
+mesh = SubResource("SphereMesh_m81n0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1136346040]
+shape = SubResource("SphereShape3D_frlfj")
+
+[node name="TeleportingArea" type="Area3D" parent="." unique_id=587988236]
+editor_description = "The entire point of this node is to use the `teleport_root` metadata somewhere. The simpler solution in this case would be to switch the root body to layer 8, so that it would get teleported automatically.
+But this is another way too."
+collision_layer = 32768
+collision_mask = 0
+monitoring = false
+metadata/teleport_root = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TeleportingArea" unique_id=615614081]
+shape = SubResource("SphereShape3D_frlfj")

@@ -1,0 +1,191 @@
+[gd_scene format=4 uid="uid://dxe2g23t2qp0j"]
+
+[ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://addons/portals/examples/assets/materials/M_prototype_dark.tres" id="1_amkmy"]
+[ext_resource type="PackedScene" uid="uid://caqayjkbvlel5" path="res://addons/portals/examples/assets/materials/prop_torus.tscn" id="2_kiw5m"]
+[ext_resource type="Script" uid="uid://cw1r4c1d7beyv" path="res://addons/portals/scripts/portal_3d.gd" id="3_q16ke"]
+[ext_resource type="Script" uid="uid://d2crarvkhd45r" path="res://addons/portals/examples/assets/player.gd" id="4_h8f6p"]
+[ext_resource type="Material" uid="uid://dcfkcyddxkglf" path="res://addons/portals/materials/editor-preview-portal-material.tres" id="4_igb2k"]
+[ext_resource type="Script" uid="uid://bxcel82b180o3" path="res://addons/portals/scripts/portal_boxmesh.gd" id="4_lgfis"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kiw5m"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_h8f6p"]
+sky_material = SubResource("ProceduralSkyMaterial_kiw5m")
+
+[sub_resource type="Environment" id="Environment_h8f6p"]
+background_mode = 1
+background_color = Color(0.403919, 0.487281, 0.596623, 1)
+sky = SubResource("Sky_h8f6p")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_5fjc1"]
+material = ExtResource("1_amkmy")
+size = Vector3(8, 1, 8)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_amkmy"]
+points = PackedVector3Array(-4, -0.5, -4, -4, 0.5, -4, 4, -0.5, -4, -4, -0.5, 4, -4, 0.5, 4, 4, 0.5, -4, 4, -0.5, 4, 4, 0.5, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q16ke"]
+size = Vector3(16, 16, 6)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_iv7mm"]
+_surfaces = [{
+"aabb": AABB(-8, -8, -1, 16, 16, 1),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAQABAABAAUAAQADAAUABQADAAcAAwACAAcABwACAAYAAgAAAAYABgAAAAQABAAFAAYABgAFAAcAAAABAAIAAgABAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAwQAAAEEAAAAAAAAAQQAAAEEAAAAAAAAAwQAAAMEAAAAAAAAAQQAAAMEAAAAAAAAAwQAAAEEAAIC/AAAAQQAAAEEAAIC/AAAAwQAAAMEAAIC/AAAAQQAAAMEAAIC//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgA==")
+}]
+script = ExtResource("4_lgfis")
+size = Vector3(16, 16, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3ddc0"]
+_surfaces = [{
+"aabb": AABB(-8, -8, -1, 16, 16, 1),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAQABAABAAUAAQADAAUABQADAAcAAwACAAcABwACAAYAAgAAAAYABgAAAAQABAAFAAYABgAFAAcAAAABAAIAAgABAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAwQAAAEEAAAAAAAAAQQAAAEEAAAAAAAAAwQAAAMEAAAAAAAAAQQAAAMEAAAAAAAAAwQAAAEEAAIC/AAAAQQAAAEEAAIC/AAAAwQAAAMEAAIC/AAAAQQAAAMEAAIC//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgA==")
+}]
+script = ExtResource("4_lgfis")
+size = Vector3(16, 16, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ucxm3"]
+height = 1.75
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lgfis"]
+radius = 0.4
+height = 1.75
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h8f6p"]
+
+[node name="LevelIsland" type="Node3D" unique_id=1416928506]
+editor_description = "When the player was also used for teleport detection here, it resulted in blinking. This was because the camera is NOT at the vertical origin of the player. That means the player (body) triggers the teleport BEFORE its camera ever reaches the portal. Therefore when the player is teleported, its camera is ABOVE the SkyPortal, resulting in a glitch.
+
+I turned off Player's collision with the portal layer and added a teleport trigger area to the same spot where his camera is. Works like a charm!"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=691087572]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=600094967]
+environment = SubResource("Environment_h8f6p")
+
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=69551792]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_5fjc1")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground" unique_id=1106271449]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D" unique_id=1790395206]
+visible = false
+shape = SubResource("ConvexPolygonShape3D_amkmy")
+
+[node name="PropTorus" parent="." unique_id=1763385523 instance=ExtResource("2_kiw5m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25, -0.25, 2.75)
+
+[node name="BottomPortal" type="Node3D" parent="." unique_id=510044789 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+process_priority = 100
+process_physics_priority = 100
+transform = Transform3D(-1, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -8.74228e-08, 1, 4.37114e-08, 0, -8, 0)
+script = ExtResource("3_q16ke")
+_portal_mesh_path = NodePath("BottomPortal_Mesh")
+_teleport_area_path = NodePath("TeleportArea")
+_teleport_collider_path = NodePath("TeleportArea/Collider")
+portal_size = Vector2(16, 16)
+exit_portal = NodePath("../SkyPortal")
+portal_frame_width = 0.0
+viewport_size_mode = 0
+view_direction = 0
+portal_render_layer = 128
+is_teleport = true
+teleport_direction = 2
+rigidbody_boost = 0.0
+teleport_tolerance = 0.5
+teleport_interactions = 3
+teleport_collision_mask = 32768
+start_deactivated = false
+metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
+metadata/_edit_group_ = true
+
+[node name="TeleportArea" type="Area3D" parent="BottomPortal" unique_id=110204935]
+
+[node name="Collider" type="CollisionShape3D" parent="BottomPortal/TeleportArea" unique_id=1128664540]
+shape = SubResource("BoxShape3D_q16ke")
+
+[node name="BottomPortal_Mesh" type="MeshInstance3D" parent="BottomPortal" unique_id=443832922]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
+layers = 128
+material_override = ExtResource("4_igb2k")
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_iv7mm")
+
+[node name="SkyPortal" type="Node3D" parent="." unique_id=1259571658 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+process_priority = 100
+process_physics_priority = 100
+editor_description = "This portal IS NOT a teleport! It's here just for show :)"
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 8, 0)
+script = ExtResource("3_q16ke")
+_portal_mesh_path = NodePath("SkyPortal_Mesh")
+portal_size = Vector2(16, 16)
+exit_portal = NodePath("../BottomPortal")
+portal_frame_width = 0.0
+viewport_size_mode = 0
+view_direction = 0
+portal_render_layer = 128
+is_teleport = false
+teleport_direction = 2
+rigidbody_boost = 0.0
+teleport_tolerance = 0.5
+teleport_interactions = 3
+teleport_collision_mask = 32768
+start_deactivated = false
+metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
+metadata/_edit_group_ = true
+
+[node name="SkyPortal_Mesh" type="MeshInstance3D" parent="SkyPortal" unique_id=1990171821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
+layers = 128
+material_override = ExtResource("4_igb2k")
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_3ddc0")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1374951153 node_paths=PackedStringArray("camera")]
+process_priority = 100
+process_physics_priority = 100
+transform = Transform3D(0.275419, 0, -0.961324, 0, 1, 0, 0.961324, 0, 0.275419, -2.07862, 1.21586, 1.84023)
+script = ExtResource("4_h8f6p")
+camera = NodePath("PlayerCamera")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=2073657881]
+shape = SubResource("CapsuleShape3D_ucxm3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1257598694]
+mesh = SubResource("CapsuleMesh_lgfis")
+
+[node name="PlayerCamera" type="Camera3D" parent="Player" unique_id=1172371392]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+current = true
+
+[node name="TeleportTrigger" type="Area3D" parent="Player/PlayerCamera" unique_id=359750244]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
+collision_layer = 32768
+collision_mask = 0
+metadata/teleport_root = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/PlayerCamera/TeleportTrigger" unique_id=1662450697]
+shape = SubResource("SphereShape3D_h8f6p")
